@@ -8,9 +8,9 @@ Purpose: encryption_decryption
 # --------------------------------------------------
 import argparse
 import os
-from methods.dictionary import Create
-from methods.text import Translate
-from encryption_decryption_record_database_odbc import EncryptionDecryptionDatabase as Database
+from processor.methods.dictionary import Create
+from processor.methods.text import Translate
+from database.encryption_decryption_record_database_odbc import EncryptionDecryptionDatabase as Database
 
 db = Database()
 

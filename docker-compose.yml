@@ -1,0 +1,14 @@
+version: "3.9"
+services:
+  web:
+#    depends_on:
+#      - processor
+    build:
+      context: .
+      dockerfile: web/Dockerfile
+    ports:
+      - "5000:5000"
+    expose:
+      - 5000
+    container_name: encryption_decryption_web
+    hostname: encryption_decryption_web

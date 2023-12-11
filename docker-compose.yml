@@ -1,8 +1,8 @@
 version: "3.9"
 services:
   web:
-#    depends_on:
-#      - processor
+    depends_on:
+      - processor
     build:
       context: .
       dockerfile: web/Dockerfile
@@ -12,3 +12,35 @@ services:
       - 5000
     container_name: encryption_decryption_web
     hostname: encryption_decryption_web
+  processor:
+    build:
+      context: .
+      dockerfile: processor/Dockerfile
+    ports:
+      - "8000:8000"
+    expose:
+      - 8000
+    container_name: encryption_decryption_processor
+    hostname: encryption_decryption_processor
+  database:
+    build:
+      context: .
+      dockerfile: database/Dockerfile
+    ports:
+      - "3000:3000"
+    expose:
+      - 3000
+    container_name: encryption_decryption_database
+    hostname: encryption_decryption_database
+  query:
+    depends_on:
+      - database
+    build:
+      context: .
+      dockerfile: query/Dockerfile
+    ports:
+      - "1000:1000"
+    expose:
+      - 1000
+    container_name: encryption_decryption_query
+    hostname: encryption_decryption_query

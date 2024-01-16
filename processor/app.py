@@ -1,3 +1,5 @@
+import json
+import re
 from typing import List
 
 import requests
@@ -32,7 +34,11 @@ def input_first():
 @app.route('/')
 def return_translated():
     """Return translated input"""
-    return "Hello"
+    # Return results.
+    printing_translation = json.dumps(translated)
+    logging.debug(f"Cleaning up {printing_translation} from unneeded things")
+    formatted_translation = re.sub(r"[\[\]]", "", )
+    return json.dumps(formatted_translation)
 
 
 if __name__ == "__main__":

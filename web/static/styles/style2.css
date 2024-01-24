@@ -1,0 +1,54 @@
+body {
+     background-color: black;
+     color: white;
+     font-family: "Lucida Console", "Courier New", monospace;
+     border-style: outset;
+     border-radius: 30px;
+     text-align: center;
+     margin-left: auto;
+    margin-right: auto;
+   }
+   script {
+   color: white;
+   background-color: maroon;
+   }
+   div {
+    background-color: maroon;
+   }
+   h1 {
+   color: white;
+   background-color: gray;
+   font-family: "Lucida Console", "Courier New", monospace;
+   text-align: center;
+   border-style: outset;
+   border-radius: 30px;
+     width: 500px;
+     display: block;
+    margin-left: auto;
+    margin-right: auto;
+   }
+
+   h2 {
+     color: white;
+     margin-left: 0px;
+     font-family: "Lucida Console", "Courier New", monospace;
+     text-align: center;
+   }
+   h4 {
+     color: white;
+     margin-left: 0px;
+     font-family: "Lucida Console", "Courier New", monospace;
+     text-align: center;
+   }
+   form {
+     color: white;
+     margin-left: 0px;
+     font-family: "Lucida Console", "Courier New", monospace;
+     text-align: center;
+   }
+   p {
+     color: white;
+     margin-left: 0px;
+     font-family: "Lucida Console", "Courier New", monospace;
+     text-align: center;
+   }

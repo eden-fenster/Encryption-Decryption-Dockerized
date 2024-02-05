@@ -17,13 +17,12 @@ def input_first():
     return render_template('index.html')
 
 
-@app.route('/fight', methods=['GET', 'POST'])
-def fight():
-    """The actual fight"""
+@app.route('/encryptordecrypt', methods=['GET', 'POST'])
+def encrypt_decrypt():
+    """Getting the input to encrypt/decrypt"""
     # Input the input + encrypt/decrypt.
     # Put into dict.
     # Sent to processor.
-    # Fight !
 
 
 if __name__ == "__main__":

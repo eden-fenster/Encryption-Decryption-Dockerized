@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/html">
+<head>
+  <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='styles/style.css') }}">
+<!--  <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">-->
+  <title>Query Dates</title>
+</head>
+
+<h1>Input dates to query</h1>
+
+<form action="/queried" method = "POST" enctype = "multipart/form-data">
+  <label for="startdate">Start Date:</label>
+  <input type="datetime-local" id="startdate" name="startdate"><br><br>
+  <label for="enddate">End Date:</label>
+  <input type="datetime-local" id="enddate" name="enddate"><br><br>
+  <input type="submit" value="Submit">
+</form>
+
+
+</body>
+</html>

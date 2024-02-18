@@ -5,6 +5,7 @@ from typing import List
 import requests
 from flask import Flask, render_template, request
 import logging
+logging.basicConfig(format='%(levelname)s:%(message)s', level=logging.DEBUG)
 
 app = Flask(__name__)
 
@@ -31,7 +32,7 @@ def input_first():
     return "Hello World"
 
 # Return translated input
-@app.route('/')
+@app.route('/translated')
 def return_translated():
     """Return translated input"""
     # Return results.

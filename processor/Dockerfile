@@ -18,6 +18,7 @@ EXPOSE 8000
 
 # Copy database to directory.
 COPY processor/*.py /encryption_decryption_processor_directory/processor/
+COPY processor/methods/*.py /encryption_decryption_processor_directory/processor/methods/
 
 
 CMD ["flask", "run", "-p", "8000"]

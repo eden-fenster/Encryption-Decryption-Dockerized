@@ -19,6 +19,7 @@ EXPOSE 5000
 # Copy database to directory.
 COPY web/*.py /encryption_decryption_web_directory/web/
 COPY web/templates/*.html /encryption_decryption_web_directory/web/templates/
+COPY web/static/styles/*.css /encryption_decryption_web_directory/web/static/styles/
 
 
 CMD ["flask", "run"]

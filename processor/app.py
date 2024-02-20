@@ -29,8 +29,7 @@ def input_first():
     input_to_translate.append(request.get_json())
     logging.debug(f"Received {input_to_translate}")
     # Create dictionary.
-    transformation_pattern: str = 'hag'
-    dictionary: dict = Create.create_dictionary(transformation_pattern=transformation_pattern,
+    dictionary: dict = Create.create_dictionary(transformation_pattern=input_to_translate[len(input_to_translate) - 1]["Pattern"],
                                                  encrypt=input_to_translate[len(input_to_translate) - 1]["Encrypt or Decrypt ?"])
     # Sending it to method that will translate it.
     translated_text: str = Translate.translate_text(text_to_translate=input_to_translate[len(input_to_translate) - 1]["Input"],

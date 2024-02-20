@@ -24,10 +24,15 @@ def encrypt_decrypt():
     # Input the input + encrypt/decrypt.
     input = request.form.get('input')
     encordec = request.form.get('encordec')
-    logging.debug(f"Input is {input} \n {encordec}")
+    pattern = request.form.get('pattern')
+    # If pattern > 26, print error message.
+    if len(pattern) > 26:
+        logging.error(f"Pattern {pattern} is too long, exiting program...")
+        return render_template('results.html') + render_template_string("the pattern was too long and therefore invalid")
+    logging.debug(f"Input is {input} \n Pattern is {pattern} \n {encordec}")
     # Put into dict.
     logging.debug("Putting into the dictionary to send")
-    dict_to_send: dict = {'Input': input, 'Encrypt or Decrypt ?': encordec}
+    dict_to_send: dict = {'Input': input, 'Encrypt or Decrypt ?': encordec, 'Pattern': pattern}
     # Sent to processor.
     requests.post('http://encryption_decryption_processor:8000/translate', json=dict_to_send, timeout=10)
     logging.debug("Sent to processor")

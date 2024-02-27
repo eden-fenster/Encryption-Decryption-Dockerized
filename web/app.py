@@ -5,6 +5,10 @@ logging.basicConfig(format='%(levelname)s:%(message)s', level=logging.DEBUG)
 
 app = Flask(__name__)
 
+
+PROCESSOR_SERVER: str = "encryption_decryption_processor"
+PROCESSOR_PORT: str = "8000"
+
 # pylint: disable=logging-fstring-interpolation
 
 # Opening page to input details.
@@ -34,10 +38,10 @@ def encrypt_decrypt():
     logging.debug("Putting into the dictionary to send")
     dict_to_send: dict = {'Input': input, 'Encrypt or Decrypt ?': encordec, 'Pattern': pattern}
     # Sent to processor.
-    requests.post('http://encryption_decryption_processor:8000/translate', json=dict_to_send, timeout=10)
+    requests.post(f'http://{PROCESSOR_SERVER}:{PROCESSOR_PORT}/translate', json=dict_to_send, timeout=10)
     logging.debug("Sent to processor")
     # Translate.
-    get_response = requests.get('http://encryption_decryption_processor:8000/translated', timeout=10)
+    get_response = requests.get(f'http://{PROCESSOR_SERVER}:{PROCESSOR_PORT}/translated', timeout=10)
     logging.debug("Got Response from processor")
     # Return response.
     response = get_response.json()

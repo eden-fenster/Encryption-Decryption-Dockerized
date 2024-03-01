@@ -2,6 +2,8 @@ from methods.dictionary import Create
 from methods.text import Translate
 import json
 import re
+import time
+from datetime import datetime
 from typing import List
 from processor_storage import Storage
 
@@ -15,13 +17,12 @@ app = Flask(__name__)
 # Storing our lists
 input_to_return: Storage = Storage()
 
-# pylint: disable=logging-fstring-interpolation
+DATABASE_SERVER: str = "encryption_decryption_database"
+DATABASE_PORT: str = "3000"
 
-# Opening page to input details.
-# List to store received input.
-# input_to_return._input: List[dict] = []
-# List to store encrypted/decrypted input.
-# input_to_return._translated_input: List[str] = []
+# pylint: disable=consider-using-f-string
+
+# pylint: disable=logging-fstring-interpolation
 
 
 # Input to translate
@@ -32,14 +33,30 @@ def input_first():
     logging.debug("Loading, recieving input ")
     input_to_return._input.append(request.get_json())
     logging.debug(f"Received {input_to_return._input}")
+    # Getting current date and time
+    logging.debug("Getting current date and time")
+    current_time = datetime.now()
+    time_string_for_print = current_time.strftime("%m/%d/%Y, %H:%M:%S")
+    time_string = current_time.strftime("%Y-%m-%d %H:%M")
     # Create dictionary.
     dictionary: dict = Create.create_dictionary(transformation_pattern=input_to_return._input[len(input_to_return._input) - 1]["Pattern"],
                                                  encrypt=input_to_return._input[len(input_to_return._input) - 1]["Encrypt or Decrypt ?"])
+    logging.debug(f"dictionary from {input_to_return._input[len(input_to_return._input) - 1]["Pattern"]} created")
     # Sending it to method that will translate it.
     translated_text: str = Translate.translate_text(text_to_translate=input_to_return._input[len(input_to_return._input) - 1]["Input"],
                                                     dictionary=dictionary)
+    logging.debug(f"{input_to_return._input[len(input_to_return._input) - 1]["Input"]} has been translated to -> {translated_text}")
     # Adding input_to_return._translated_input input to list.
     input_to_return._translated_input.append(translated_text)
+    # adding input + dictionary + time to database.
+    # database_record: dict = {"Solution": "Initial Grid: <br>" + initial_string +
+    #                                      "<br>Solved Grid: <br>" + solved_string,
+    #                          "Time": total_time_string, "Date": time_string}
+    # requests.post(f"http://{DATABASE_SERVER}:{DATABASE_PORT}/database",
+    #               json=database_record, timeout=10)
+    # logging.debug(f"Added record {database_record} to database")
+    # clearing list.
+    input_to_return._input.clear()
 
     return '', 204
 
@@ -51,6 +68,8 @@ def return_translated():
     printing_translation = json.dumps(input_to_return._translated_input)
     logging.debug(f"Cleaning up {printing_translation} from unneeded things")
     formatted_translation = re.sub(r"[\[\]]", "", printing_translation)
+    # clearing list
+    input_to_return._translated_input.clear()
     return json.dumps(formatted_translation)
 
 

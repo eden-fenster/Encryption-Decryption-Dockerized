@@ -33,7 +33,7 @@ def encrypt_decrypt():
     if len(pattern) > 26:
         logging.error(f"Pattern {pattern} is too long, exiting program...")
         return render_template('results.html') + render_template_string("the pattern was too long and therefore invalid")
-    logging.debug(f"Input is {input} \n Pattern is {pattern} \n {encordec}")
+    logging.debug(f"Input is {input} \n Pattern is {pattern} \n Encrypt or Decrypt ? {encordec}")
     # Put into dict.
     logging.debug("Putting into the dictionary to send")
     dict_to_send: dict = {'Input': input, 'Encrypt or Decrypt ?': encordec, 'Pattern': pattern}
@@ -45,7 +45,9 @@ def encrypt_decrypt():
     logging.debug("Got Response from processor")
     # Return response.
     response = get_response.json()
-    logging.debug("Printing response")
+    if not response:
+        raise SystemError('Unable to get info')
+    logging.debug(f"Getting and returning response {get_response} from processor")
     return render_template('results.html', Title='Results',
                            Content='Translation has been successful:\n') + render_template_string(response)
 

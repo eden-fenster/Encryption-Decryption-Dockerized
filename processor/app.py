@@ -38,6 +38,7 @@ def input_first():
     current_time = datetime.now()
     time_string_for_print = current_time.strftime("%m/%d/%Y, %H:%M:%S")
     time_string = current_time.strftime("%Y-%m-%d %H:%M")
+    start_time = time.time()
     # Create dictionary.
     dictionary: dict = Create.create_dictionary(transformation_pattern=input_to_return._input[len(input_to_return._input) - 1]["Pattern"],
                                                  encrypt=input_to_return._input[len(input_to_return._input) - 1]["Encrypt or Decrypt ?"])
@@ -45,16 +46,19 @@ def input_first():
     # Sending it to method that will translate it.
     translated_text: str = Translate.translate_text(text_to_translate=input_to_return._input[len(input_to_return._input) - 1]["Input"],
                                                     dictionary=dictionary)
+    end_time = time.time()
+    total_time = end_time - start_time
+    total_time_string: str = str("%.2f" % total_time)
     logging.debug(f"{input_to_return._input[len(input_to_return._input) - 1]["Input"]} has been translated to -> {translated_text}")
     # Adding input_to_return._translated_input input to list.
     input_to_return._translated_input.append(translated_text)
     # adding input + dictionary + time to database.
-    # database_record: dict = {"Solution": "Initial Grid: <br>" + initial_string +
-    #                                      "<br>Solved Grid: <br>" + solved_string,
-    #                          "Time": total_time_string, "Date": time_string}
-    # requests.post(f"http://{DATABASE_SERVER}:{DATABASE_PORT}/database",
-    #               json=database_record, timeout=10)
-    # logging.debug(f"Added record {database_record} to database")
+    database_record: dict = {"Original": input_to_return._input[len(input_to_return._input) - 1]["Input"], 
+                             "Translated": translated_text,
+                             "Time": total_time_string, "Date": time_string}
+    requests.post(f"http://{DATABASE_SERVER}:{DATABASE_PORT}/database",
+                  json=database_record, timeout=10)
+    logging.debug(f"Added record {database_record} to database")
     # clearing list.
     input_to_return._input.clear()
 

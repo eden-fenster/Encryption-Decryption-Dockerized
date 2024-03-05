@@ -16,7 +16,8 @@ def create(directory: str, database_name: str):
     conn = sqlite3.connect(f'{full_path}.db', check_same_thread=False)
     c = conn.cursor()
     command = f"""CREATE TABLE IF NOT EXISTS {database_name} (
-    solution text,
+    original text,
+    translated text,
     time text,
     date timestamp
     )"""

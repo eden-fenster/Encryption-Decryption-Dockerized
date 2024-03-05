@@ -12,7 +12,7 @@ class Storage:
     def __init__(self, directory: str, database_name: str):
         """Creating storage for database and JSON lists that will be returned"""
         # Creating the database.
-        sys.path.append(f"/sudoku_database_directory/{directory}/")
+        sys.path.append(f"/encryption_decryption_database_directory/{directory}/")
         from create_database import create
         create(directory=f'{directory}', database_name=f'{database_name}')
         logging.debug("created")

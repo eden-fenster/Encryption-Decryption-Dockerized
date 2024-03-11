@@ -18,6 +18,8 @@ EXPOSE 1000
 
 # Copy database to directory.
 COPY query/*.py /encryption_decryption_query_directory/query/
+COPY query/templates/*.html /encryption_decryption_query_directory/query/templates/
+COPY query/static/styles/*.css /encryption_decryption_query_directory/query/static/styles/
 
 
 CMD ["flask", "run", "-p", "1000"]

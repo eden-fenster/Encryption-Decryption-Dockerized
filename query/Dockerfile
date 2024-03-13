@@ -20,6 +20,7 @@ EXPOSE 1000
 COPY query/*.py /encryption_decryption_query_directory/query/
 COPY query/templates/*.html /encryption_decryption_query_directory/query/templates/
 COPY query/static/styles/*.css /encryption_decryption_query_directory/query/static/styles/
+COPY query/static/favicon.ico /encryption_decryption_query_directory/query/static/
 
 
 CMD ["flask", "run", "-p", "1000"]

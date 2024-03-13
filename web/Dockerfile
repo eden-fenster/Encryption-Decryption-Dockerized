@@ -20,6 +20,7 @@ EXPOSE 5000
 COPY web/*.py /encryption_decryption_web_directory/web/
 COPY web/templates/*.html /encryption_decryption_web_directory/web/templates/
 COPY web/static/styles/*.css /encryption_decryption_web_directory/web/static/styles/
+COPY web/static/favicon.ico /encryption_decryption_web_directory/web/static/
 
 
 CMD ["flask", "run"]

@@ -18,6 +18,7 @@ def create(directory: str, database_name: str):
     command = f"""CREATE TABLE IF NOT EXISTS {database_name} (
     original text,
     translated text,
+    encordec text,
     time text,
     date timestamp
     )"""

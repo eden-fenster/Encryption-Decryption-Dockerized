@@ -35,6 +35,7 @@ def add_to_database():
     encryption_decryption.responses.append(request.get_json())
     original = encryption_decryption.responses[len(encryption_decryption.responses) - 1]["Original"]
     translated = encryption_decryption.responses[len(encryption_decryption.responses) - 1]["Translated"]
+    encordec = encryption_decryption.responses[len(encryption_decryption.responses) - 1]["Encrypt or Decrypt ?"]
     time = encryption_decryption.responses[len(encryption_decryption.responses) - 1]["Time"]
     date = datetime.strptime(encryption_decryption.responses[len(encryption_decryption.responses) - 1]["Date"], '%Y-%m-%d %H:%M')
     # If of wrong type, raise value error.
@@ -42,13 +43,15 @@ def add_to_database():
         raise ValueError(f"Variable {original} is of wrong type {type(original)}")
     if not isinstance(translated, str):
         raise ValueError(f"Variable {translated} is of wrong type {type(translated)}")
+    if not isinstance(encordec, str):
+        raise ValueError(f"Variable {encordec} is of wrong type {type(encordec)}")
     if not isinstance(time, str):
         raise ValueError(f"Variable {time} is of wrong type {type(time)}")
     if not isinstance(date, datetime):
         raise ValueError(f"Variable {date} is of wrong type {type(date)}")
     # Adding to database
-    logging.debug("Original -> %s \n Translated -> %s \n Time -> %s \n Date -> %s", original, translated, time, date)
-    encryption_decryption.database.add_one(original=original, translated=translated, time=time, our_date=date)
+    logging.debug("Original -> %s \n Translated -> %s \n Encrypt or Decrypt ? -> %s \n Time -> %s \n Date -> %s", original, translated, encordec, time, date)
+    encryption_decryption.database.add_one(original=original, translated=translated, encordec=encordec, time=time, our_date=date)
     return '', 204
 
 

@@ -55,6 +55,7 @@ def input_first():
     # adding input + dictionary + time to database.
     database_record: dict = {"Original": input_to_return._input[len(input_to_return._input) - 1]["Input"], 
                              "Translated": translated_text,
+                             "Encrypt or Decrypt ?": input_to_return._input[len(input_to_return._input) - 1]["Encrypt or Decrypt ?"],
                              "Time": total_time_string, "Date": time_string}
     requests.post(f"http://{DATABASE_SERVER}:{DATABASE_PORT}/database",
                   json=database_record, timeout=10)
